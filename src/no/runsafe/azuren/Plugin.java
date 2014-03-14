@@ -13,6 +13,8 @@ public class Plugin extends RunsafeConfigurablePlugin
 	@Override
 	protected void pluginSetup()
 	{
+		server = getComponent(IServer.class);
+
 		addComponent(Events.class);
 		addComponent(Configuration.class);
 
@@ -20,8 +22,6 @@ public class Plugin extends RunsafeConfigurablePlugin
 		addComponent(WorldHandler.class);
 		addComponent(DungeonHandler.class);
 		addComponent(MobHandler.class);
-
-		server = getComponent(IServer.class);
 	}
 
 	public ChunkGenerator getDefaultWorldGenerator(String worldName, String id)
