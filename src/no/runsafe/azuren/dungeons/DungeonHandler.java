@@ -43,6 +43,9 @@ public class DungeonHandler implements IPlayerRightClickBlock
 				{
 					targetBlock.set(Item.Unavailable.Air); // Remove the end frame block
 					effectLocation.getWorld().createExplosion(effectLocation, 3, false, false);
+					int lootAmount = random.nextInt(3) + 1;
+					for (int c = 0; c < lootAmount; c++)
+						loot.get(random.nextInt(loot.size())).drop(effectLocation);
 				}
 			}, 11);
 		}
@@ -58,10 +61,6 @@ public class DungeonHandler implements IPlayerRightClickBlock
 			{
 				location.playEffect(sparkEffect, 1F, 100, 30);
 				location.playSound(Sound.Environment.Fizz, 1F, 0F);
-
-				int lootAmount = random.nextInt(3) + 1;
-				for (int c = 0; c < lootAmount; c++)
-					loot.get(random.nextInt(loot.size())).drop(location);
 			}
 		}, seconds);
 	}
