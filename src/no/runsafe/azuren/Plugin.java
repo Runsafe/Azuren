@@ -22,8 +22,8 @@ public class Plugin extends RunsafeConfigurablePlugin
 		addComponent(Generator.class);
 		addComponent(WorldHandler.class);
 		addComponent(DungeonHandler.class);
-		addComponent(Register.class);
-		addComponent(MobHandler.class);
+		//addComponent(Register.class);
+		//addComponent(MobHandler.class);
 	}
 
 	public ChunkGenerator getDefaultWorldGenerator(String worldName, String id)
