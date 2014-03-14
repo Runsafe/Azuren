@@ -42,9 +42,20 @@ public class MobHandler implements IPluginEnabled, IPluginDisabled
 
 	private void runCycle()
 	{
-		for (IPlayer player : server.getOnlinePlayers())
+		for (final IPlayer player : server.getOnlinePlayers())
+		{
 			if (handler.playerIsInAzurenWorld(player) && random.nextFloat() <= 0.001)
-				new Nightstalker(ObjectUnwrapper.getMinecraft(player.getWorld())).spawn(player.getLocation());
+			{
+				scheduler.runNow(new Runnable()
+				{
+					@Override
+					public void run()
+					{
+						new Nightstalker(ObjectUnwrapper.getMinecraft(player.getWorld())).spawn(player.getLocation());
+					}
+				});
+			}
+		}
 	}
 
 	private int cycle;
