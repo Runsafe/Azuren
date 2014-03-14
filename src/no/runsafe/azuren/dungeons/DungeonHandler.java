@@ -4,12 +4,11 @@ import no.runsafe.azuren.WorldHandler;
 import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.IScheduler;
 import no.runsafe.framework.api.block.IBlock;
+import no.runsafe.framework.api.entity.IEntity;
+import no.runsafe.framework.api.entity.ILivingEntity;
 import no.runsafe.framework.api.event.player.IPlayerRightClickBlock;
 import no.runsafe.framework.api.player.IPlayer;
-import no.runsafe.framework.minecraft.Item;
-import no.runsafe.framework.minecraft.Sound;
-import no.runsafe.framework.minecraft.WorldBlockEffect;
-import no.runsafe.framework.minecraft.WorldBlockEffectType;
+import no.runsafe.framework.minecraft.*;
 import no.runsafe.framework.minecraft.entity.LivingEntity;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
 
@@ -65,8 +64,15 @@ public class DungeonHandler implements IPlayerRightClickBlock
 				location.playSound(Sound.Environment.Fizz, 1F, 0F);
 
 				int mobAmount = random.nextInt(2) + 1;
+				Buff jumpBuff = Buff.Utility.Movement.JumpHeight.ambient(true).amplification(5).duration(36000);
+				Buff powerBuff = Buff.Combat.Damage.Increase.ambient(true).amplification(3).duration(36000);
 				for (int m = 0; m < mobAmount; m++)
-					LivingEntity.Silverfish.spawn(location);
+				{
+					ILivingEntity entity = (ILivingEntity) LivingEntity.Silverfish.spawn(location);
+					jumpBuff.applyTo(entity);
+					powerBuff.applyTo(entity);
+				}
+
 			}
 		}, seconds);
 	}
