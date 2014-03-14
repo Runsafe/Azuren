@@ -15,11 +15,12 @@ public class Nightstalker extends EntityBat
 	{
 		super(world);
 		rworld = Plugin.server.getWorld(world.worldData.getName());
+		effect = new MobEffect(MobEffectList.INVISIBILITY.id, 86400 * 20, 1, true);
 	}
 
 	public void spawn(ILocation location)
 	{
-		addEffect(new MobEffect(MobEffectList.INVISIBILITY.id, 86400 * 20, 1));
+		addEffect(effect);
 
 		RunsafeSkull skull = (RunsafeSkull) no.runsafe.framework.minecraft.Item.Decoration.Head.Human.getItem();
 		skull.setOwner("JettKuso");
@@ -70,21 +71,28 @@ public class Nightstalker extends EntityBat
 	}
 
 	@Override
-	public void die(DamageSource damagesource)
-	{
-		getLocation().playSound(Sound.Creature.Zombie.Death, 2, 2);
-
-		if (damagesource.getEntity() instanceof EntityPlayer)
-			new NightstalkerKill(Plugin.server.getPlayerExact(damagesource.getEntity().getName())).Fire();
-
-		super.die(damagesource);
-	}
-
-	@Override
 	protected void dropDeathLoot(boolean flag, int i)
 	{
 		a(Items.COOKIE, 1); // Always drop a cookie.
 	}
 
+	@Override
+	protected void bn()
+	{
+		super.bn();
+
+		addEffect(effect);
+
+		if (!died && !isAlive())
+		{
+			died = true;
+			getLocation().playSound(Sound.Creature.Zombie.Death, 2, 2);
+			if (killer != null)
+				new NightstalkerKill(Plugin.server.getPlayerExact(killer.getName())).Fire();
+		}
+	}
+
 	private final IWorld rworld;
+	private boolean died;
+	private final MobEffect effect;
 }
