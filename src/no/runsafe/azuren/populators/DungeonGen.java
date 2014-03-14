@@ -18,7 +18,7 @@ public class DungeonGen extends BlockPopulator
 			int startX = chunk.getX() * 16;
 			int startZ = chunk.getZ() * 16;
 
-			int startY = random.nextInt(50) + 80; // Testing numbers.
+			int startY = random.nextInt(40) + 10; // Testing numbers.
 
 			int currentLayer = 0;
 			for (int[][] layer : dungeonLayout)
