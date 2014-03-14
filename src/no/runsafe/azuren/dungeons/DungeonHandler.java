@@ -6,6 +6,7 @@ import no.runsafe.framework.api.block.IBlock;
 import no.runsafe.framework.api.event.player.IPlayerRightClickBlock;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Item;
+import no.runsafe.framework.minecraft.Sound;
 import no.runsafe.framework.minecraft.WorldBlockEffect;
 import no.runsafe.framework.minecraft.WorldBlockEffectType;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
@@ -24,7 +25,9 @@ public class DungeonHandler implements IPlayerRightClickBlock
 		if (targetBlock.is(Item.Decoration.EnderPortalFrame) && usingItem.is(Item.Miscellaneous.EyeOfEnder))
 		{
 			final ILocation effectLocation = targetBlock.getLocation();
+
 			effectLocation.offset(0.5, 0.5, 0.5); // Offset to middle of the block.
+			effectLocation.playSound(Sound.Portal.Travel, 1F, 0F);
 
 			for (int i = 0; i < 10; i++)
 				playSpark(effectLocation, i);
@@ -37,7 +40,7 @@ public class DungeonHandler implements IPlayerRightClickBlock
 					targetBlock.set(Item.Unavailable.Air); // Remove the end frame block
 					effectLocation.getWorld().createExplosion(effectLocation, 3, false, false);
 				}
-			}, 10);
+			}, 11);
 		}
 		return true;
 	}
@@ -50,6 +53,7 @@ public class DungeonHandler implements IPlayerRightClickBlock
 			public void run()
 			{
 				location.playEffect(sparkEffect, 1F, 100, 30);
+				location.playSound(Sound.Environment.Fizz, 1F, 0F);
 			}
 		}, seconds);
 	}
