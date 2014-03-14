@@ -1,9 +1,6 @@
 package no.runsafe.azuren;
 
-import no.runsafe.azuren.populators.Ground;
-import no.runsafe.azuren.populators.IceUnderlay;
-import no.runsafe.azuren.populators.Spires;
-import no.runsafe.azuren.populators.Surface;
+import no.runsafe.azuren.populators.*;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -26,6 +23,7 @@ public class Generator extends ChunkGenerator
 		poppers.add(new IceUnderlay());
 		poppers.add(new Surface());
 		poppers.add(new Spires());
+		poppers.add(new DungeonGen());
 		return poppers;
 	}
 
