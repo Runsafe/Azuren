@@ -14,12 +14,11 @@ public class Nightstalker extends EntityBat
 	{
 		super(world);
 		rworld = Plugin.server.getWorld(world.worldData.getName());
-		effect = new MobEffect(MobEffectList.INVISIBILITY.id, 86400 * 20, 1);
 	}
 
 	public void spawn(ILocation location)
 	{
-		addEffect(effect);
+		addEffect(new MobEffect(MobEffectList.INVISIBILITY.id, 86400 * 20, 1));
 
 		RunsafeSkull skull = (RunsafeSkull) no.runsafe.framework.minecraft.Item.Decoration.Head.Human.getItem();
 		skull.setOwner("JettKuso");
@@ -83,6 +82,4 @@ public class Nightstalker extends EntityBat
 	}
 
 	private final IWorld rworld;
-	private final MobEffect effect;
-	private boolean hasSetup;
 }
