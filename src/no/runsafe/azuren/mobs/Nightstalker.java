@@ -19,6 +19,13 @@ public class Nightstalker extends EntityBat
 
 	public void spawn(ILocation location)
 	{
+		addEffect(effect);
+
+		RunsafeSkull skull = (RunsafeSkull) no.runsafe.framework.minecraft.Item.Decoration.Head.Human.getItem();
+		skull.setOwner("JettKuso");
+		setEquipment(4, ObjectUnwrapper.getMinecraft(skull));
+		dropChances[4] = 0.0F; // Prevent head dropping
+
 		setPosition(location.getX(), location.getY(), location.getZ());
 		world.addEntity(this);
 		location.playSound(Sound.Creature.Wolf.Growl, 2, 0);
@@ -74,25 +81,6 @@ public class Nightstalker extends EntityBat
 	{
 		a(Items.COOKIE, 1); // Always drop a cookie.
 	}
-
-	@Override
-	protected void bn()
-	{
-		super.bn();
-
-		if (!hasSetup)
-		{
-			hasSetup = true;
-			addEffect(effect);
-
-			RunsafeSkull skull = (RunsafeSkull) no.runsafe.framework.minecraft.Item.Decoration.Head.Human.getItem();
-			skull.setOwner("JettKuso");
-			setEquipment(4, ObjectUnwrapper.getMinecraft(skull));
-			dropChances[4] = 0.0F; // Prevent head dropping
-		}
-	}
-
-
 
 	private final IWorld rworld;
 	private final MobEffect effect;
