@@ -2,6 +2,7 @@ package no.runsafe.azuren.mobs;
 
 import net.minecraft.server.v1_7_R1.*;
 import no.runsafe.azuren.Plugin;
+import no.runsafe.azuren.events.NightstalkerKill;
 import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.IWorld;
 import no.runsafe.framework.internal.wrapper.ObjectUnwrapper;
@@ -72,6 +73,10 @@ public class Nightstalker extends EntityBat
 	public void die(DamageSource damagesource)
 	{
 		getLocation().playSound(Sound.Creature.Zombie.Death, 2, 2);
+
+		if (damagesource.getEntity() instanceof EntityPlayer)
+			new NightstalkerKill(Plugin.server.getPlayerExact(damagesource.getEntity().getName()));
+
 		super.die(damagesource);
 	}
 
