@@ -75,7 +75,7 @@ public class Nightstalker extends EntityBat
 		getLocation().playSound(Sound.Creature.Zombie.Death, 2, 2);
 
 		if (damagesource.getEntity() instanceof EntityPlayer)
-			new NightstalkerKill(Plugin.server.getPlayerExact(damagesource.getEntity().getName()));
+			new NightstalkerKill(Plugin.server.getPlayerExact(damagesource.getEntity().getName())).Fire();
 
 		super.die(damagesource);
 	}
