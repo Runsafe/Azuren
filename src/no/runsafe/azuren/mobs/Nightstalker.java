@@ -21,6 +21,7 @@ public class Nightstalker extends EntityBat
 	{
 		setPosition(location.getX(), location.getY(), location.getZ());
 		world.addEntity(this);
+		location.playSound(Sound.Creature.Wolf.Growl, 2, 0);
 	}
 
 	private boolean hasWorld()
