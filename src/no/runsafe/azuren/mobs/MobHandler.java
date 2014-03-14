@@ -2,12 +2,14 @@ package no.runsafe.azuren.mobs;
 
 import no.runsafe.azuren.WorldHandler;
 import no.runsafe.framework.api.event.player.IPlayerInteractEvent;
+import no.runsafe.framework.api.event.plugin.IPluginEnabled;
 import no.runsafe.framework.api.log.IConsole;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.internal.wrapper.ObjectUnwrapper;
 import no.runsafe.framework.minecraft.event.player.RunsafePlayerInteractEvent;
+import no.runsafe.framework.tools.nms.EntityRegister;
 
-public class MobHandler implements IPlayerInteractEvent
+public class MobHandler implements IPlayerInteractEvent, IPluginEnabled
 {
 	public MobHandler(IConsole console, WorldHandler handler)
 	{
@@ -25,6 +27,12 @@ public class MobHandler implements IPlayerInteractEvent
 			console.logInformation("Player is in correct world.");
 			new Nightstalker(ObjectUnwrapper.getMinecraft(player.getWorld())).spawn(player.getLocation());
 		}
+	}
+
+	@Override
+	public void OnPluginEnabled()
+	{
+		EntityRegister.registerEntity(Nightstalker.class, "nightstalker", 51);
 	}
 
 	private final IConsole console;
