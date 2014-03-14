@@ -44,7 +44,6 @@ public class DungeonHandler implements IPlayerRightClickBlock
 				public void run()
 				{
 					targetBlock.set(Item.Unavailable.Air); // Remove the end frame block
-					effectLocation.getWorld().createExplosion(effectLocation, 3, false, false);
 					int lootAmount = random.nextInt(3) + 1;
 					for (int c = 0; c < lootAmount; c++)
 						loot.get(random.nextInt(loot.size())).drop(effectLocation);
