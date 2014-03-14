@@ -22,9 +22,9 @@ public class Generator extends ChunkGenerator
 	{
 		List<BlockPopulator> poppers = new ArrayList<BlockPopulator>(1);
 		poppers.add(new WorldFloor());
-		poppers.add(new IceUnderlay());
-		poppers.add(new Surface());
-		poppers.add(new Spires());
+		//poppers.add(new IceUnderlay());
+		//poppers.add(new Surface());
+		//poppers.add(new Spires());
 		return poppers;
 	}
 
