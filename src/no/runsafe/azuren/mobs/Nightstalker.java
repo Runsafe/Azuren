@@ -25,7 +25,7 @@ public class Nightstalker extends EntityBat
 		setEquipment(4, ObjectUnwrapper.getMinecraft(skull));
 		dropChances[4] = 0.0F; // Prevent head dropping
 
-		setPosition(location.getX(), location.getY(), location.getZ());
+		setPosition(location.getX(), 75, location.getZ());
 		world.addEntity(this);
 		location.playSound(Sound.Creature.Wolf.Growl, 2, 0);
 	}

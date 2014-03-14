@@ -1,40 +1,55 @@
 package no.runsafe.azuren.mobs;
 
 import no.runsafe.azuren.WorldHandler;
-import no.runsafe.framework.api.event.player.IPlayerInteractEvent;
+import no.runsafe.framework.api.IScheduler;
+import no.runsafe.framework.api.IServer;
+import no.runsafe.framework.api.event.plugin.IPluginDisabled;
 import no.runsafe.framework.api.event.plugin.IPluginEnabled;
-import no.runsafe.framework.api.log.IConsole;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.internal.wrapper.ObjectUnwrapper;
-import no.runsafe.framework.minecraft.event.player.RunsafePlayerInteractEvent;
 import no.runsafe.framework.tools.nms.EntityRegister;
 
-public class MobHandler implements IPlayerInteractEvent, IPluginEnabled
-{
-	public MobHandler(IConsole console, WorldHandler handler)
-	{
-		this.console = console;
-		this.handler = handler;
-	}
+import java.util.Random;
 
-	@Override
-	public void OnPlayerInteractEvent(RunsafePlayerInteractEvent event)
+public class MobHandler implements IPluginEnabled, IPluginDisabled
+{
+	public MobHandler(IScheduler scheduler, WorldHandler handler, IServer server)
 	{
-		console.logInformation("Event detected");
-		IPlayer player = event.getPlayer();
-		if (handler.playerIsInAzurenWorld(player))
-		{
-			console.logInformation("Player is in correct world.");
-			new Nightstalker(ObjectUnwrapper.getMinecraft(player.getWorld())).spawn(player.getLocation());
-		}
+		this.scheduler = scheduler;
+		this.handler = handler;
+		this.server = server;
 	}
 
 	@Override
 	public void OnPluginEnabled()
 	{
 		EntityRegister.registerEntity(Nightstalker.class, "nightstalker", 51);
+		cycle = scheduler.startAsyncRepeatingTask(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				runCycle();
+			}
+		}, 10, 10);
 	}
 
-	private final IConsole console;
+	@Override
+	public void OnPluginDisabled()
+	{
+		scheduler.cancelTask(cycle);
+	}
+
+	private void runCycle()
+	{
+		for (IPlayer player : server.getOnlinePlayers())
+			if (handler.playerIsInAzurenWorld(player) && random.nextFloat() <= 0.05)
+				new Nightstalker(ObjectUnwrapper.getMinecraft(player.getWorld())).spawn(player.getLocation());
+	}
+
+	private int cycle;
+	private final IScheduler scheduler;
 	private final WorldHandler handler;
+	private final IServer server;
+	private final Random random = new Random();
 }
