@@ -1,6 +1,7 @@
 package no.runsafe.azuren.dungeons;
 
 import no.runsafe.azuren.WorldHandler;
+import no.runsafe.azuren.events.DungeonEvent;
 import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.IScheduler;
 import no.runsafe.framework.api.block.IBlock;
@@ -48,6 +49,8 @@ public class DungeonHandler implements IPlayerRightClickBlock
 						loot.get(random.nextInt(loot.size())).drop(effectLocation);
 				}
 			}, 11);
+
+			new DungeonEvent(player).Fire();
 		}
 		return true;
 	}
