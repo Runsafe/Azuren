@@ -5,7 +5,6 @@ import no.runsafe.azuren.mobs.MobHandler;
 import no.runsafe.azuren.mobs.Register;
 import no.runsafe.framework.RunsafeConfigurablePlugin;
 import no.runsafe.framework.api.IServer;
-import no.runsafe.framework.features.Configuration;
 import no.runsafe.framework.features.Events;
 import org.bukkit.generator.ChunkGenerator;
 
@@ -17,7 +16,6 @@ public class Plugin extends RunsafeConfigurablePlugin
 		server = getComponent(IServer.class);
 
 		addComponent(Events.class);
-		addComponent(Configuration.class);
 
 		addComponent(Generator.class);
 		addComponent(WorldHandler.class);
