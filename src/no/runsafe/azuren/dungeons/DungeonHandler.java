@@ -4,7 +4,6 @@ import no.runsafe.azuren.WorldHandler;
 import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.IScheduler;
 import no.runsafe.framework.api.block.IBlock;
-import no.runsafe.framework.api.entity.IEntity;
 import no.runsafe.framework.api.entity.ILivingEntity;
 import no.runsafe.framework.api.event.player.IPlayerRightClickBlock;
 import no.runsafe.framework.api.player.IPlayer;
