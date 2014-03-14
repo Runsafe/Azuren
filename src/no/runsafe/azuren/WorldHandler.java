@@ -17,12 +17,12 @@ public class WorldHandler implements IConfigurationChanged
 		worlds.addAll(config.getConfigValueAsList("worlds"));
 	}
 
-	public static boolean isAzurenWorld(IWorld world)
+	public boolean isAzurenWorld(IWorld world)
 	{
 		return worlds.contains(world.getName());
 	}
 
-	public static boolean playerIsInAzurenWorld(IPlayer player)
+	public boolean playerIsInAzurenWorld(IPlayer player)
 	{
 		return isAzurenWorld(player.getWorld());
 	}

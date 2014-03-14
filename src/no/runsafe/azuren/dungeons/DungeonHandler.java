@@ -19,16 +19,17 @@ import java.util.Random;
 
 public class DungeonHandler implements IPlayerRightClickBlock
 {
-	public DungeonHandler(IScheduler scheduler)
+	public DungeonHandler(IScheduler scheduler, WorldHandler handler)
 	{
 		this.scheduler = scheduler;
+		this.handler = handler;
 		sparkEffect = new WorldBlockEffect(WorldBlockEffectType.BLOCK_DUST, Item.BuildingBlock.StainedClay.Green);
 	}
 
 	@Override
 	public boolean OnPlayerRightClick(IPlayer player, RunsafeMeta usingItem, final IBlock targetBlock)
 	{
-		if (targetBlock.is(Item.Decoration.EnderPortalFrame) && usingItem.is(Item.Miscellaneous.EyeOfEnder) && WorldHandler.playerIsInAzurenWorld(player))
+		if (targetBlock.is(Item.Decoration.EnderPortalFrame) && usingItem.is(Item.Miscellaneous.EyeOfEnder) && handler.playerIsInAzurenWorld(player))
 		{
 			final ILocation effectLocation = targetBlock.getLocation();
 
@@ -73,6 +74,7 @@ public class DungeonHandler implements IPlayerRightClickBlock
 	private final WorldBlockEffect sparkEffect;
 	private final IScheduler scheduler;
 	public static final Random random = new Random();
+	private final WorldHandler handler;
 
 	private static final List<DungeonLoot> loot = new ArrayList<DungeonLoot>(0);
 	static

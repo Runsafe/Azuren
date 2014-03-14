@@ -11,9 +11,10 @@ import no.runsafe.framework.tools.nms.EntityRegister;
 
 public class MobHandler implements IPluginEnabled, IPlayerInteractEvent
 {
-	public MobHandler(IConsole console)
+	public MobHandler(IConsole console, WorldHandler handler)
 	{
 		this.console = console;
+		this.handler = handler;
 	}
 
 	@Override
@@ -27,7 +28,7 @@ public class MobHandler implements IPluginEnabled, IPlayerInteractEvent
 	{
 		console.logInformation("Event detected");
 		IPlayer player = event.getPlayer();
-		if (WorldHandler.playerIsInAzurenWorld(player))
+		if (handler.playerIsInAzurenWorld(player))
 		{
 			console.logInformation("Player is in correct world.");
 			new Nightstalker(ObjectUnwrapper.getMinecraft(player.getWorld())).spawn(player.getLocation());
@@ -35,4 +36,5 @@ public class MobHandler implements IPluginEnabled, IPlayerInteractEvent
 	}
 
 	private final IConsole console;
+	private final WorldHandler handler;
 }
