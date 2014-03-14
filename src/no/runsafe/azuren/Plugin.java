@@ -2,6 +2,7 @@ package no.runsafe.azuren;
 
 import no.runsafe.azuren.dungeons.DungeonHandler;
 import no.runsafe.azuren.mobs.MobHandler;
+import no.runsafe.azuren.mobs.Register;
 import no.runsafe.framework.RunsafeConfigurablePlugin;
 import no.runsafe.framework.api.IServer;
 import no.runsafe.framework.features.Configuration;
@@ -21,6 +22,7 @@ public class Plugin extends RunsafeConfigurablePlugin
 		addComponent(Generator.class);
 		addComponent(WorldHandler.class);
 		addComponent(DungeonHandler.class);
+		addComponent(Register.class);
 		addComponent(MobHandler.class);
 	}
 
