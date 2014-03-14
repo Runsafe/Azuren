@@ -2,7 +2,6 @@ package no.runsafe.azuren.mobs;
 
 import net.minecraft.server.v1_7_R1.*;
 import no.runsafe.azuren.Plugin;
-import no.runsafe.azuren.events.NightstalkerKill;
 import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.IWorld;
 import no.runsafe.framework.internal.wrapper.ObjectUnwrapper;
@@ -74,22 +73,6 @@ public class Nightstalker extends EntityBat
 	protected void dropDeathLoot(boolean flag, int i)
 	{
 		a(Items.COOKIE, 1); // Always drop a cookie.
-	}
-
-	@Override
-	protected void bn()
-	{
-		super.bn();
-
-		addEffect(effect);
-
-		if (!died && !isAlive())
-		{
-			died = true;
-			getLocation().playSound(Sound.Creature.Zombie.Death, 2, 2);
-			if (killer != null)
-				new NightstalkerKill(Plugin.server.getPlayerExact(killer.getName())).Fire();
-		}
 	}
 
 	private final IWorld rworld;
