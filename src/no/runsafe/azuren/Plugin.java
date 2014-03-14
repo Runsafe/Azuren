@@ -8,6 +8,7 @@ public class Plugin extends RunsafePlugin
 	@Override
 	protected void pluginSetup()
 	{
+		addComponent(Generator.class);
 	}
 
 	public ChunkGenerator getDefaultWorldGenerator(String worldName, String id)
