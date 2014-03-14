@@ -11,6 +11,10 @@ import no.runsafe.framework.minecraft.WorldBlockEffect;
 import no.runsafe.framework.minecraft.WorldBlockEffectType;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public class DungeonHandler implements IPlayerRightClickBlock
 {
 	public DungeonHandler(IScheduler scheduler)
@@ -54,10 +58,36 @@ public class DungeonHandler implements IPlayerRightClickBlock
 			{
 				location.playEffect(sparkEffect, 1F, 100, 30);
 				location.playSound(Sound.Environment.Fizz, 1F, 0F);
+
+				int lootAmount = random.nextInt(3) + 1;
+				for (int c = 0; c < lootAmount; c++)
+					loot.get(random.nextInt(loot.size())).drop(location);
 			}
 		}, seconds);
 	}
 
 	private final WorldBlockEffect sparkEffect;
 	private final IScheduler scheduler;
+	public static final Random random = new Random();
+
+	private static final List<DungeonLoot> loot = new ArrayList<DungeonLoot>(0);
+	static
+	{
+		loot.add(new DungeonLoot(Item.Materials.Diamond, 3));
+		loot.add(new DungeonLoot(Item.Materials.Emerald, 5, 10));
+		loot.add(new DungeonLoot(Item.Tool.Pickaxe.Diamond));
+		loot.add(new DungeonLoot(Item.Tool.Shovel.Diamond));
+		loot.add(new DungeonLoot(Item.Combat.Boots.Diamond));
+		loot.add(new DungeonLoot(Item.Combat.Chestplate.Diamond));
+		loot.add(new DungeonLoot(Item.Combat.Leggings.Diamond));
+		loot.add(new DungeonLoot(Item.Combat.Helmet.Diamond));
+		loot.add(new DungeonLoot(Item.Transportation.Saddle));
+		loot.add(new DungeonLoot(Item.Miscellaneous.EnderPearl, 10, 15));
+		loot.add(new DungeonLoot(Item.Food.Golden.Apple));
+		loot.add(new DungeonLoot(Item.Food.Plant.Apple, 2));
+		loot.add(new DungeonLoot(Item.Materials.GoldIngot, 4, 6));
+		loot.add(new DungeonLoot(Item.Transportation.Minecart.Explosive));
+		loot.add(new DungeonLoot(Item.Combat.Sword.Diamond));
+		loot.add(new DungeonLoot(Item.Miscellaneous.Beacon));
+	};
 }
