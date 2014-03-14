@@ -1,6 +1,9 @@
 package no.runsafe.azuren;
 
+import no.runsafe.azuren.populators.IceUnderlay;
+import no.runsafe.azuren.populators.Spires;
 import no.runsafe.azuren.populators.Surface;
+import no.runsafe.azuren.populators.WorldFloor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -8,7 +11,6 @@ import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -19,37 +21,11 @@ public class Generator extends ChunkGenerator
 	public List<BlockPopulator> getDefaultPopulators(World world)
 	{
 		List<BlockPopulator> poppers = new ArrayList<BlockPopulator>(1);
+		poppers.add(new WorldFloor());
+		poppers.add(new IceUnderlay());
 		poppers.add(new Surface());
+		poppers.add(new Spires());
 		return poppers;
-	}
-
-	@Override
-	public byte[][] generateBlockSections(World world, Random random, int cx, int cz, BiomeGrid biomes)
-	{
-		byte[] result = GroundGenerator();
-
-		byte[][] chunk = new byte[8][4096];
-		for (int x = 0; x < 16; ++x)
-			for (int y = 0; y < 128; ++y)
-				for (int z = 0; z < 16; ++z)
-					chunk[y >> 4][((y & 0xF) << 8) | (z << 4) | x] = result[(x * 16 + z) * 128 + y];
-
-		return chunk;
-	}
-
-	private byte[] GroundGenerator()
-	{
-		byte result[] = new byte[32768];
-		Arrays.fill(result, (byte) 0);
-		for (int x = 0; x < 16; ++x)
-		{
-			for (int z = 0; z < 16; ++z)
-			{
-				int offset = (x * 16 + z) * 128;
-				Arrays.fill(result, offset, offset + 63, (byte) Material.ENDER_STONE.getId());
-			}
-		}
-		return result;
 	}
 
 	public Location getFixedSpawnLocation(World world, Random random)

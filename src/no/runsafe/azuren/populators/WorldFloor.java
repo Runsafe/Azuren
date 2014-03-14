@@ -6,12 +6,11 @@ import org.bukkit.World;
 
 import java.util.Random;
 
-@SuppressWarnings("deprecation")
-public class Surface extends SheetGenerator
+public class WorldFloor extends SheetGenerator
 {
 	@Override
 	public void populate(World world, Random random, Chunk chunk)
 	{
-		generateSheet(chunk, 64, Material.STAINED_CLAY.getId(), (byte) 11);
+		generateSheet(chunk, 0, Material.OBSIDIAN.getId(), (byte) 0);
 	}
 }
