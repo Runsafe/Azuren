@@ -1,5 +1,6 @@
 package no.runsafe.azuren;
 
+import no.runsafe.azuren.populators.Ground;
 import no.runsafe.azuren.populators.IceUnderlay;
 import no.runsafe.azuren.populators.Spires;
 import no.runsafe.azuren.populators.Surface;
@@ -21,6 +22,7 @@ public class Generator extends ChunkGenerator
 	public List<BlockPopulator> getDefaultPopulators(World world)
 	{
 		List<BlockPopulator> poppers = new ArrayList<BlockPopulator>(1);
+		poppers.add(new Ground());
 		poppers.add(new IceUnderlay());
 		poppers.add(new Surface());
 		poppers.add(new Spires());
