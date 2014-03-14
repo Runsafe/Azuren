@@ -9,6 +9,7 @@ import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.Sound;
 import no.runsafe.framework.minecraft.WorldBlockEffect;
 import no.runsafe.framework.minecraft.WorldBlockEffectType;
+import no.runsafe.framework.minecraft.entity.LivingEntity;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
 
 import java.util.ArrayList;
@@ -61,6 +62,10 @@ public class DungeonHandler implements IPlayerRightClickBlock
 			{
 				location.playEffect(sparkEffect, 1F, 100, 30);
 				location.playSound(Sound.Environment.Fizz, 1F, 0F);
+
+				int mobAmount = random.nextInt(2) + 1;
+				for (int m = 0; m < mobAmount; m++)
+					LivingEntity.Silverfish.spawn(location);
 			}
 		}, seconds);
 	}
