@@ -17,7 +17,7 @@ public class Spires extends BlockPopulator
 		{
 			for (int z = 0; z < 16; z++)
 			{
-				if (random.nextFloat() <= 0.15F)
+				if (random.nextFloat() <= 0.5F)
 				{
 					int treeTop = 65 + (3 + random.nextInt(4));
 					for (int y = 65; y < treeTop; y++)
