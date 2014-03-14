@@ -64,7 +64,7 @@ public class DungeonHandler implements IPlayerRightClickBlock
 
 				int mobAmount = random.nextInt(2) + 1;
 				Buff jumpBuff = Buff.Utility.Movement.JumpHeight.ambient(true).amplification(5).duration(36000);
-				Buff powerBuff = Buff.Combat.Damage.Increase.ambient(true).amplification(3).duration(36000);
+				Buff powerBuff = Buff.Combat.Damage.Increase.ambient(true).amplification(2).duration(36000);
 				for (int m = 0; m < mobAmount; m++)
 				{
 					ILivingEntity entity = (ILivingEntity) LivingEntity.Silverfish.spawn(location);
