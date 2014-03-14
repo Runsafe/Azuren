@@ -37,7 +37,7 @@ public class DungeonHandler implements IPlayerRightClickBlock
 					targetBlock.set(Item.Unavailable.Air); // Remove the end frame block
 					effectLocation.getWorld().createExplosion(effectLocation, 3, false, false);
 				}
-			}, 11);
+			}, 10);
 		}
 		return true;
 	}
