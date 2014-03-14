@@ -89,6 +89,7 @@ public class DungeonHandler implements IPlayerRightClickBlock
 		loot.add(new DungeonLoot(Item.Combat.Helmet.Diamond));
 		loot.add(new DungeonLoot(Item.Transportation.Saddle));
 		loot.add(new DungeonLoot(Item.Miscellaneous.EnderPearl, 10, 15));
+		loot.add(new DungeonLoot(Item.BuildingBlock.EndStone, 10, 30));
 		loot.add(new DungeonLoot(Item.Food.Golden.Apple));
 		loot.add(new DungeonLoot(Item.Food.Plant.Apple, 2));
 		loot.add(new DungeonLoot(Item.Materials.GoldIngot, 4, 6));
