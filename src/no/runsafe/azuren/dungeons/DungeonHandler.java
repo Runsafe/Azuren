@@ -1,5 +1,6 @@
 package no.runsafe.azuren.dungeons;
 
+import no.runsafe.azuren.WorldHandler;
 import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.IScheduler;
 import no.runsafe.framework.api.block.IBlock;
@@ -27,7 +28,7 @@ public class DungeonHandler implements IPlayerRightClickBlock
 	@Override
 	public boolean OnPlayerRightClick(IPlayer player, RunsafeMeta usingItem, final IBlock targetBlock)
 	{
-		if (targetBlock.is(Item.Decoration.EnderPortalFrame) && usingItem.is(Item.Miscellaneous.EyeOfEnder))
+		if (targetBlock.is(Item.Decoration.EnderPortalFrame) && usingItem.is(Item.Miscellaneous.EyeOfEnder) && WorldHandler.playerIsInAzurenWorld(player))
 		{
 			final ILocation effectLocation = targetBlock.getLocation();
 
