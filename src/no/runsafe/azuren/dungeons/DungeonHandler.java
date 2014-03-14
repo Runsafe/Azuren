@@ -66,6 +66,7 @@ public class DungeonHandler implements IPlayerRightClickBlock
 				Buff jumpBuff = Buff.Utility.Movement.JumpHeight.ambient(true).amplification(5).duration(36000);
 				Buff powerBuff = Buff.Combat.Damage.Increase.ambient(true).amplification(2).duration(36000);
 				Buff speedBuff = Buff.Utility.Movement.IncreaseSpeed.ambient(true).amplification(2).duration(36000);
+				Buff fireResist = Buff.Resistance.Fire.ambient(true).amplification(2).duration(36000);
 
 				for (int m = 0; m < mobAmount; m++)
 				{
@@ -73,6 +74,7 @@ public class DungeonHandler implements IPlayerRightClickBlock
 					jumpBuff.applyTo(entity);
 					powerBuff.applyTo(entity);
 					speedBuff.applyTo(entity);
+					fireResist.applyTo(entity);
 				}
 
 			}
