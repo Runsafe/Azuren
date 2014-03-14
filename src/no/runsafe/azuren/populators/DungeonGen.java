@@ -15,8 +15,8 @@ public class DungeonGen extends BlockPopulator
 		if (random.nextFloat() <= 0.01)
 		{
 			// Render dungeon
-			int startX = chunk.getX();
-			int startZ = chunk.getZ();
+			int startX = chunk.getX() * 16;
+			int startZ = chunk.getZ() * 16;
 
 			int startY = random.nextInt(50) + 80; // Testing numbers.
 
