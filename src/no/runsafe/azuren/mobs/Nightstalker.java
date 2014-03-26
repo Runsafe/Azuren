@@ -1,6 +1,6 @@
 package no.runsafe.azuren.mobs;
 
-import net.minecraft.server.v1_7_R1.*;
+import net.minecraft.server.v1_7_R2.*;
 import no.runsafe.azuren.Plugin;
 import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.IWorld;
@@ -57,7 +57,7 @@ public class Nightstalker extends EntityBat
 	}
 
 	@Override
-	protected String aU()
+	protected String aS()
 	{
 		return null;
 	}
