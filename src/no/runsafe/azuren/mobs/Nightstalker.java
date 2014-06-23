@@ -1,6 +1,6 @@
 package no.runsafe.azuren.mobs;
 
-import net.minecraft.server.v1_7_R2.*;
+import net.minecraft.server.v1_7_R3.*;
 import no.runsafe.azuren.Plugin;
 import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.IWorld;
