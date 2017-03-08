@@ -14,7 +14,7 @@ public class Nightstalker extends EntityBat
 	{
 		super(world);
 		rworld = Plugin.server.getWorld(world.worldData.getName());
-		effect = new MobEffect(MobEffectList.INVISIBILITY.id, 86400 * 20, 1, true);
+		effect = new MobEffect(MobEffectList.INVISIBILITY.id, 86400 * 20, 1, true, true);
 	}
 
 	public void spawn(ILocation location)
@@ -44,20 +44,44 @@ public class Nightstalker extends EntityBat
 		return rworld.getLocation(locX, locY, locZ);
 	}
 
+	/*
+	* Involved in randomly playing the bat idle sound
+	* Make it return null instead.
+	* Names of this function in various spigot versions:
+	* v1_7_R3: t
+	* v1_8_R3: z
+	* v1_9_R2: G, returns SoundEffect instead
+	 */
 	@Override
-	protected String t()
+	protected String z()
 	{
 		return null;
 	}
 
+	/*
+	* Involved in playing the bat death sound.
+	* Make it return null instead.
+	* Names of this function in various spigot versions:
+	* v1_7_R3: aT
+	* v1_8_R3: bp
+	* v1_9_R2: bT, returns SoundEffect instead
+	 */
 	@Override
-	protected String aT()
+	protected String bp()
 	{
 		return null;
 	}
 
+	/*
+	* Involved in playing the bat hurt sound.
+	* Make it return null instead.
+	* Names of this function in various spigot versions:
+	* v1_7_R3: aS
+	* v1_8_R3: bo
+	* v1_9_R2: bS, returns SoundEffect instead
+	 */
 	@Override
-	protected String aS()
+	protected String bo()
 	{
 		return null;
 	}
