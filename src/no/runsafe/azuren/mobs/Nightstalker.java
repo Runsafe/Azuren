@@ -17,12 +17,12 @@ public class Nightstalker extends EntityBat
 		effect = new MobEffect(MobEffectList.INVISIBILITY.id, 86400 * 20, 1, true, true);
 	}
 
-	public void spawn(ILocation location)
+	public void spawn(ILocation location, String headName)
 	{
 		addEffect(effect);
 
 		RunsafeSkull skull = (RunsafeSkull) no.runsafe.framework.minecraft.Item.Decoration.Head.Human.getItem();
-		skull.setOwner("JettKuso");
+		skull.setOwner(headName);
 		setEquipment(4, ObjectUnwrapper.getMinecraft(skull));
 		dropChances[4] = 0.0F; // Prevent head dropping
 
