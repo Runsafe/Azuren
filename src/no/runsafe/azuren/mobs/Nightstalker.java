@@ -17,12 +17,12 @@ public class Nightstalker extends EntityBat
 		effect = new MobEffect(MobEffectList.INVISIBILITY.id, 86400 * 20, 1, true, true);
 	}
 
-	public void spawn(ILocation location)
+	public void spawn(ILocation location, String headName)
 	{
 		addEffect(effect);
 
 		RunsafeSkull skull = (RunsafeSkull) no.runsafe.framework.minecraft.Item.Decoration.Head.Human.getItem();
-		skull.setOwner("JettKuso");
+		skull.setOwner(headName);
 		setEquipment(4, ObjectUnwrapper.getMinecraft(skull));
 		dropChances[4] = 0.0F; // Prevent head dropping
 
@@ -45,12 +45,11 @@ public class Nightstalker extends EntityBat
 	}
 
 	/*
-	* Involved in randomly playing the bat idle sound
+	* Plays Idle Sound.
 	* Make it return null instead.
 	* Names of this function in various spigot versions:
-	* v1_7_R3: t
 	* v1_8_R3: z
-	* v1_9_R2: G, returns SoundEffect instead
+	* v1_12_R1: F returns SoundEffect
 	 */
 	@Override
 	protected String z()
@@ -62,9 +61,8 @@ public class Nightstalker extends EntityBat
 	* Involved in playing the bat death sound.
 	* Make it return null instead.
 	* Names of this function in various spigot versions:
-	* v1_7_R3: aT
 	* v1_8_R3: bp
-	* v1_9_R2: bT, returns SoundEffect instead
+	* v1_12_R1: cf, returns SoundEffect
 	 */
 	@Override
 	protected String bp()
@@ -73,12 +71,11 @@ public class Nightstalker extends EntityBat
 	}
 
 	/*
-	* Involved in playing the bat hurt sound.
+	* Plays bat hurt sound.
 	* Make it return null instead.
 	* Names of this function in various spigot versions:
-	* v1_7_R3: aS
 	* v1_8_R3: bo
-	* v1_9_R2: bS, returns SoundEffect instead
+	* v1_12_R1: d(DamageSource), returns SoundEffect
 	 */
 	@Override
 	protected String bo()

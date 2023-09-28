@@ -1,8 +1,10 @@
 package no.runsafe.azuren.mobs;
 
 import no.runsafe.azuren.WorldHandler;
+import no.runsafe.framework.api.IConfiguration;
 import no.runsafe.framework.api.IScheduler;
 import no.runsafe.framework.api.IServer;
+import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
 import no.runsafe.framework.api.event.plugin.IPluginDisabled;
 import no.runsafe.framework.api.event.plugin.IPluginEnabled;
 import no.runsafe.framework.api.player.IPlayer;
@@ -11,7 +13,7 @@ import no.runsafe.framework.tools.nms.EntityRegister;
 
 import java.util.Random;
 
-public class MobHandler implements IPluginEnabled, IPluginDisabled
+public class MobHandler implements IPluginEnabled, IPluginDisabled, IConfigurationChanged
 {
 	public MobHandler(IScheduler scheduler, WorldHandler handler, IServer server)
 	{
@@ -40,6 +42,13 @@ public class MobHandler implements IPluginEnabled, IPluginDisabled
 		scheduler.cancelTask(cycle);
 	}
 
+	@Override
+	public void OnConfigurationChanged(IConfiguration config)
+	{
+		this.config = config;
+		this.nightstalkerHeadName = config.getConfigValueAsString("nightstalkerHeadName");
+	}
+
 	private void runCycle()
 	{
 		for (final IPlayer player : server.getOnlinePlayers())
@@ -51,13 +60,15 @@ public class MobHandler implements IPluginEnabled, IPluginDisabled
 					@Override
 					public void run()
 					{
-						new Nightstalker(ObjectUnwrapper.getMinecraft(player.getWorld())).spawn(player.getLocation());
+						new Nightstalker(ObjectUnwrapper.getMinecraft(player.getWorld())).spawn(player.getLocation(), nightstalkerHeadName);
 					}
 				});
 			}
 		}
 	}
 
+	private String nightstalkerHeadName;
+	private IConfiguration config;
 	private int cycle;
 	private final IScheduler scheduler;
 	private final WorldHandler handler;
