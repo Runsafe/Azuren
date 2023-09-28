@@ -28,6 +28,9 @@ public class DungeonHandler implements IPlayerRightClickBlock
 	@Override
 	public boolean OnPlayerRightClick(IPlayer player, RunsafeMeta usingItem, final IBlock targetBlock)
 	{
+		if (usingItem == null || targetBlock == null)
+			return true;
+
 		if (targetBlock.is(Item.Decoration.EnderPortalFrame) && usingItem.is(Item.Miscellaneous.EyeOfEnder) && handler.playerIsInAzurenWorld(player))
 		{
 			final ILocation effectLocation = targetBlock.getLocation();
