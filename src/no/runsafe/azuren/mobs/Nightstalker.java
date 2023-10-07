@@ -24,7 +24,7 @@ public class Nightstalker extends EntityBat
 		RunsafeSkull skull = (RunsafeSkull) no.runsafe.framework.minecraft.Item.Decoration.Head.Human.getItem();
 		skull.setOwner(headName);
 		setEquipment(EnumItemSlot.HEAD, ObjectUnwrapper.getMinecraft(skull));
-		dropChanceArmor[4] = 0.0F; // Prevent head dropping
+		dropChanceArmor[3] = 0.0F; // Prevent head dropping
 
 		setPosition(location.getX(), 75, location.getZ());
 		world.addEntity(this);
