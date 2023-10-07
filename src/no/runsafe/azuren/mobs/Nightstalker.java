@@ -1,6 +1,6 @@
 package no.runsafe.azuren.mobs;
 
-import net.minecraft.server.v1_8_R3.*;
+import net.minecraft.server.v1_12_R1.*;
 import no.runsafe.azuren.Plugin;
 import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.IWorld;
@@ -14,7 +14,7 @@ public class Nightstalker extends EntityBat
 	{
 		super(world);
 		rworld = Plugin.server.getWorld(world.worldData.getName());
-		effect = new MobEffect(MobEffectList.INVISIBILITY.id, 86400 * 20, 1, true, true);
+		effect = new MobEffect(MobEffects.INVISIBILITY, 86400 * 20, 1, true, true);
 	}
 
 	public void spawn(ILocation location, String headName)
@@ -23,8 +23,8 @@ public class Nightstalker extends EntityBat
 
 		RunsafeSkull skull = (RunsafeSkull) no.runsafe.framework.minecraft.Item.Decoration.Head.Human.getItem();
 		skull.setOwner(headName);
-		setEquipment(4, ObjectUnwrapper.getMinecraft(skull));
-		dropChances[4] = 0.0F; // Prevent head dropping
+		setEquipment(EnumItemSlot.HEAD, ObjectUnwrapper.getMinecraft(skull));
+		dropChanceArmor[4] = 0.0F; // Prevent head dropping
 
 		setPosition(location.getX(), 75, location.getZ());
 		world.addEntity(this);
@@ -48,11 +48,10 @@ public class Nightstalker extends EntityBat
 	* Plays Idle Sound.
 	* Make it return null instead.
 	* Names of this function in various spigot versions:
-	* v1_8_R3: z
-	* v1_12_R1: F returns SoundEffect
+	* v1_12_R1: F
 	 */
 	@Override
-	protected String z()
+	public SoundEffect F()
 	{
 		return null;
 	}
@@ -61,11 +60,10 @@ public class Nightstalker extends EntityBat
 	* Involved in playing the bat death sound.
 	* Make it return null instead.
 	* Names of this function in various spigot versions:
-	* v1_8_R3: bp
-	* v1_12_R1: cf, returns SoundEffect
+	* v1_12_R1: cf
 	 */
 	@Override
-	protected String bp()
+	protected SoundEffect cf()
 	{
 		return null;
 	}
@@ -74,11 +72,10 @@ public class Nightstalker extends EntityBat
 	* Plays bat hurt sound.
 	* Make it return null instead.
 	* Names of this function in various spigot versions:
-	* v1_8_R3: bo
 	* v1_12_R1: d(DamageSource), returns SoundEffect
 	 */
 	@Override
-	protected String bo()
+	protected SoundEffect d(DamageSource damageSource)
 	{
 		return null;
 	}
