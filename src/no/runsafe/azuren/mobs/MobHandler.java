@@ -25,7 +25,7 @@ public class MobHandler implements IPluginEnabled, IPluginDisabled, IConfigurati
 	@Override
 	public void OnPluginEnabled()
 	{
-		EntityRegister.registerEntity(Nightstalker.class, "nightstalker", 301);
+		EntityRegister.registerEntity(Nightstalker.class, "nightstalker", 65);
 		cycle = scheduler.startAsyncRepeatingTask(new Runnable()
 		{
 			@Override
