@@ -18,7 +18,7 @@ public class Generator extends ChunkGenerator
 	@Override
 	public List<BlockPopulator> getDefaultPopulators(World world)
 	{
-		List<BlockPopulator> poppers = new ArrayList<BlockPopulator>(1);
+		List<BlockPopulator> poppers = new ArrayList<>(1);
 		poppers.add(new Ground());
 		poppers.add(new IceUnderlay());
 		poppers.add(new Surface());
@@ -30,7 +30,7 @@ public class Generator extends ChunkGenerator
 	@Override
 	public byte[][] generateBlockSections(World world, Random random, int cx, int cz, BiomeGrid biomes)
 	{
-		byte result[] = new byte[32768];
+		byte[] result = new byte[32768];
 		Arrays.fill(result, (byte) 0);
 		for (int x = 0; x < 16; ++x)
 		{

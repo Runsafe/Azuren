@@ -26,14 +26,7 @@ public class MobHandler implements IPluginEnabled, IPluginDisabled, IConfigurati
 	public void OnPluginEnabled()
 	{
 		EntityRegister.registerEntity(Nightstalker.class, "nightstalker", 51);
-		cycle = scheduler.startAsyncRepeatingTask(new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				runCycle();
-			}
-		}, 10, 10);
+		cycle = scheduler.startAsyncRepeatingTask(this::runCycle, 10, 10);
 	}
 
 	@Override
@@ -45,7 +38,6 @@ public class MobHandler implements IPluginEnabled, IPluginDisabled, IConfigurati
 	@Override
 	public void OnConfigurationChanged(IConfiguration config)
 	{
-		this.config = config;
 		this.nightstalkerHeadName = config.getConfigValueAsString("nightstalkerHeadName");
 	}
 
@@ -53,22 +45,14 @@ public class MobHandler implements IPluginEnabled, IPluginDisabled, IConfigurati
 	{
 		for (final IPlayer player : server.getOnlinePlayers())
 		{
-			if (handler.playerIsInAzurenWorld(player) && random.nextFloat() <= 0.001)
-			{
-				scheduler.runNow(new Runnable()
-				{
-					@Override
-					public void run()
-					{
-						new Nightstalker(ObjectUnwrapper.getMinecraft(player.getWorld())).spawn(player.getLocation(), nightstalkerHeadName);
-					}
-				});
-			}
+			if (!handler.playerIsInAzurenWorld(player) || !(random.nextFloat() <= 0.001))
+				continue;
+
+			scheduler.runNow(() -> new Nightstalker(ObjectUnwrapper.getMinecraft(player.getWorld())).spawn(player.getLocation(), nightstalkerHeadName));
 		}
 	}
 
 	private String nightstalkerHeadName;
-	private IConfiguration config;
 	private int cycle;
 	private final IScheduler scheduler;
 	private final WorldHandler handler;

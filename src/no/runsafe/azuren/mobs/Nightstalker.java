@@ -94,6 +94,5 @@ public class Nightstalker extends EntityBat
 	}
 
 	private final IWorld rworld;
-	private boolean died;
 	private final MobEffect effect;
 }
