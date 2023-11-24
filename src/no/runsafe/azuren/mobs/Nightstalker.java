@@ -4,9 +4,7 @@ import net.minecraft.server.v1_12_R1.*;
 import no.runsafe.azuren.Plugin;
 import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.IWorld;
-import no.runsafe.framework.internal.wrapper.ObjectUnwrapper;
 import no.runsafe.framework.minecraft.Sound;
-import no.runsafe.framework.minecraft.item.meta.RunsafeSkull;
 
 public class Nightstalker extends EntityBat
 {
@@ -14,18 +12,17 @@ public class Nightstalker extends EntityBat
 	{
 		super(world);
 		rworld = Plugin.server.getWorld(world.worldData.getName());
-		effect = new MobEffect(MobEffects.INVISIBILITY, 86400 * 20, 1, true, true);
+		//effect = new MobEffect(MobEffects.INVISIBILITY, 86400 * 20, 1, true, true);
 	}
 
 	public void spawn(ILocation location, String headName)
 	{
-		addEffect(effect);
+		//addEffect(effect);
 
-		RunsafeSkull skull = (RunsafeSkull) no.runsafe.framework.minecraft.Item.Decoration.Head.Human.getItem();
-		skull.setOwner(headName);
-		setEquipment(EnumItemSlot.HEAD, ObjectUnwrapper.getMinecraft(skull));
-		dropChanceArmor[3] = 0.0F; // Prevent head dropping
-
+		//RunsafeSkull skull = (RunsafeSkull) no.runsafe.framework.minecraft.Item.Decoration.Head.Human.getItem();
+		//skull.setOwner(headName);
+		//setEquipment(EnumItemSlot.HEAD, ObjectUnwrapper.getMinecraft(skull));
+		//dropChanceArmor[3] = 0.0F; // Prevent head dropping
 		setPosition(location.getX(), 75, location.getZ());
 		world.addEntity(this);
 		location.playSound(Sound.Creature.Wolf.Growl, 2, 0);
@@ -94,5 +91,5 @@ public class Nightstalker extends EntityBat
 	}
 
 	private final IWorld rworld;
-	private final MobEffect effect;
+	//private final MobEffect effect;
 }
