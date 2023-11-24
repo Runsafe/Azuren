@@ -41,16 +41,12 @@ public class DungeonHandler implements IPlayerRightClickBlock
 			for (int i = 0; i < 10; i++)
 				playSpark(effectLocation, i);
 
-			scheduler.startSyncTask(new Runnable()
+			scheduler.startSyncTask(() ->
 			{
-				@Override
-				public void run()
-				{
-					targetBlock.set(Item.Unavailable.Air); // Remove the end frame block
-					int lootAmount = random.nextInt(3) + 1;
-					for (int c = 0; c < lootAmount; c++)
-						loot.get(random.nextInt(loot.size())).drop(effectLocation);
-				}
+				targetBlock.set(Item.Unavailable.Air); // Remove the end frame block
+				int lootAmount = random.nextInt(3) + 1;
+				for (int c = 0; c < lootAmount; c++)
+					loot.get(random.nextInt(loot.size())).drop(effectLocation);
 			}, 11);
 
 			new DungeonEvent(player).Fire();
@@ -60,30 +56,26 @@ public class DungeonHandler implements IPlayerRightClickBlock
 
 	private void playSpark(final ILocation location, int seconds)
 	{
-		scheduler.startSyncTask(new Runnable()
+		scheduler.startSyncTask(() ->
 		{
-			@Override
-			public void run()
+			location.playEffect(sparkEffect, 1F, 100, 30);
+			location.playSound(Sound.Environment.Fizz, 1F, 0F);
+
+			int mobAmount = random.nextInt(2) + 1;
+			Buff jumpBuff = Buff.Utility.Movement.JumpHeight.ambient(true).amplification(5).duration(36000);
+			Buff powerBuff = Buff.Combat.Damage.Increase.ambient(true).amplification(2).duration(36000);
+			Buff speedBuff = Buff.Utility.Movement.IncreaseSpeed.ambient(true).amplification(2).duration(36000);
+			Buff fireResist = Buff.Resistance.Fire.ambient(true).amplification(2).duration(36000);
+
+			for (int m = 0; m < mobAmount; m++)
 			{
-				location.playEffect(sparkEffect, 1F, 100, 30);
-				location.playSound(Sound.Environment.Fizz, 1F, 0F);
-
-				int mobAmount = random.nextInt(2) + 1;
-				Buff jumpBuff = Buff.Utility.Movement.JumpHeight.ambient(true).amplification(5).duration(36000);
-				Buff powerBuff = Buff.Combat.Damage.Increase.ambient(true).amplification(2).duration(36000);
-				Buff speedBuff = Buff.Utility.Movement.IncreaseSpeed.ambient(true).amplification(2).duration(36000);
-				Buff fireResist = Buff.Resistance.Fire.ambient(true).amplification(2).duration(36000);
-
-				for (int m = 0; m < mobAmount; m++)
-				{
-					ILivingEntity entity = (ILivingEntity) LivingEntity.Silverfish.spawn(location);
-					jumpBuff.applyTo(entity);
-					powerBuff.applyTo(entity);
-					speedBuff.applyTo(entity);
-					fireResist.applyTo(entity);
-				}
-
+				ILivingEntity entity = (ILivingEntity) LivingEntity.Silverfish.spawn(location);
+				jumpBuff.applyTo(entity);
+				powerBuff.applyTo(entity);
+				speedBuff.applyTo(entity);
+				fireResist.applyTo(entity);
 			}
+
 		}, seconds);
 	}
 
@@ -92,7 +84,7 @@ public class DungeonHandler implements IPlayerRightClickBlock
 	public static final Random random = new Random();
 	private final WorldHandler handler;
 
-	private static final List<DungeonLoot> loot = new ArrayList<DungeonLoot>(0);
+	private static final List<DungeonLoot> loot = new ArrayList<>(0);
 	static
 	{
 		loot.add(new DungeonLoot(Item.Materials.Diamond, 3));

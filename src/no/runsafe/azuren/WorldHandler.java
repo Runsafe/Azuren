@@ -19,6 +19,8 @@ public class WorldHandler implements IConfigurationChanged
 
 	public boolean isAzurenWorld(IWorld world)
 	{
+		if (world == null)
+			return false;
 		return worlds.contains(world.getName());
 	}
 
@@ -27,5 +29,5 @@ public class WorldHandler implements IConfigurationChanged
 		return isAzurenWorld(player.getWorld());
 	}
 
-	private final List<String> worlds = new ArrayList<String>(0);
+	private final List<String> worlds = new ArrayList<>(0);
 }
