@@ -1,9 +1,8 @@
 package no.runsafe.azuren.mobs;
 
+import net.minecraft.server.v1_12_R1.World;
 import no.runsafe.azuren.WorldHandler;
-import no.runsafe.framework.api.IConfiguration;
-import no.runsafe.framework.api.IScheduler;
-import no.runsafe.framework.api.IServer;
+import no.runsafe.framework.api.*;
 import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
 import no.runsafe.framework.api.event.plugin.IPluginDisabled;
 import no.runsafe.framework.api.event.plugin.IPluginEnabled;
@@ -11,6 +10,7 @@ import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.internal.wrapper.ObjectUnwrapper;
 import no.runsafe.framework.tools.nms.EntityRegister;
 
+import java.util.Objects;
 import java.util.Random;
 
 public class MobHandler implements IPluginEnabled, IPluginDisabled, IConfigurationChanged
@@ -39,20 +39,24 @@ public class MobHandler implements IPluginEnabled, IPluginDisabled, IConfigurati
 	public void OnConfigurationChanged(IConfiguration config)
 	{
 		this.nightstalkerHeadName = config.getConfigValueAsString("nightstalkerHeadName");
+		this.nightstalkerSpawnRate = config.getConfigValueAsFloat("nightstalkerSpawnRate");
 	}
 
 	private void runCycle()
 	{
 		for (final IPlayer player : server.getOnlinePlayers())
 		{
-			if (!handler.playerIsInAzurenWorld(player) || !(random.nextFloat() <= 0.001))
+			ILocation location = player.getLocation();
+			if (location == null || !handler.isAzurenWorld(location.getWorld()) || !(random.nextFloat() <= nightstalkerSpawnRate))
 				continue;
 
-			scheduler.runNow(() -> new Nightstalker(ObjectUnwrapper.getMinecraft(player.getWorld())).spawn(player.getLocation(), nightstalkerHeadName));
+			World world = ObjectUnwrapper.getMinecraft(location.getWorld());
+			scheduler.runNow(() -> new Nightstalker(world).spawn(location, nightstalkerHeadName));
 		}
 	}
 
 	private String nightstalkerHeadName;
+	private float nightstalkerSpawnRate = 0.001f;
 	private int cycle;
 	private final IScheduler scheduler;
 	private final WorldHandler handler;
