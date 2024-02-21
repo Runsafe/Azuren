@@ -10,7 +10,6 @@ import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.internal.wrapper.ObjectUnwrapper;
 import no.runsafe.framework.tools.nms.EntityRegister;
 
-import java.util.Objects;
 import java.util.Random;
 
 public class MobHandler implements IPluginEnabled, IPluginDisabled, IConfigurationChanged

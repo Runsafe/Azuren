@@ -108,5 +108,5 @@ public class DungeonHandler implements IPlayerRightClickBlock
 		loot.add(new DungeonLoot(Item.BuildingBlock.EndStone, 10, 30));
 		loot.add(new DungeonLoot(Item.Miscellaneous.Beacon));
 		loot.add(new DungeonLoot(Item.Brewing.BrewingStand));
-	};
+	}
 }

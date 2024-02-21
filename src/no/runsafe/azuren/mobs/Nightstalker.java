@@ -80,7 +80,9 @@ public class Nightstalker extends EntityBat
 	@Override
 	public boolean damageEntity(DamageSource damageSource, float v)
 	{
-		getLocation().playSound(Sound.Creature.PigZombie.Hurt, 2, 2);
+		ILocation location = getLocation();
+		if (location != null)
+			getLocation().playSound(Sound.Creature.PigZombie.Hurt, 2, 2);
 		return super.damageEntity(damageSource, v);
 	}
 
