@@ -11,7 +11,7 @@ public class Nightstalker extends EntityBat
 	public Nightstalker(World world)
 	{
 		super(world);
-		rworld = Plugin.server.getWorld(world.worldData.getName());
+		wrappedWorld = Plugin.server.getWorld(world.worldData.getName());
 		//effect = new MobEffect(MobEffects.INVISIBILITY, 86400 * 20, 1, true, true);
 	}
 
@@ -38,7 +38,7 @@ public class Nightstalker extends EntityBat
 		if (!hasWorld())
 			return null;
 
-		return rworld.getLocation(locX, locY, locZ);
+		return wrappedWorld.getLocation(locX, locY, locZ);
 	}
 
 	/*
@@ -92,6 +92,6 @@ public class Nightstalker extends EntityBat
 		a(Items.COOKIE, 1); // Always drop a cookie.
 	}
 
-	private final IWorld rworld;
+	private final IWorld wrappedWorld;
 	//private final MobEffect effect;
 }
